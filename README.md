@@ -140,3 +140,23 @@ Find the line `#DAEMON_CONF=""` and change it to:
 ```` bash
 DAEMON_CONF="/etc/hostapd/wlan1.conf"
 ````
+### Configure Dnsmasq for DHCP
+Dnsmasq will manage IP address distribution for connected devices:
+
+Back up the existing Dnsmasq configuration:
+```bash
+sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
+```
+   
+Create a new configuration:
+```bash
+sudo nano /etc/dnsmasq.conf
+```
+Add the following lines:
+```
+interface=wlan1
+dhcp-range=192.168.50.2,192.168.50.100,255.255.255.0,24h
+server=8.8.8.8
+server=8.8.4.4
+   ```
+
