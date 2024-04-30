@@ -23,7 +23,7 @@ We will create a simple bash script that:
 - After connecting, it will fetch the external IP address and display it
 - Uses a text file called `login.conf` where the OpenVPN username and password are stored to connect without prompt (you can secure this file and make it accessible only to root users, this will work because we will run the scipt as root)
 - Logs the output of OpenVPN to a text file `out.txt`
-Here we go:
+Here we go, 
 ```` bash
 #!/bin/bash
 
@@ -49,4 +49,21 @@ sleep 10
 echo "Fetching public IPv4 address..."
 PUBLIC_IP=$(curl -s https://ipinfo.io/ip)
 echo "Your public IPv4 address is: $PUBLIC_IP"
-```` 
+````
+Let's call this file `go.sh` and make it executable:
+```` bash
+chmod +x go.sh
+````
+`login.conf` looks like this:
+```` text
+username
+password
+````
+To connect to the default VPN:
+```` bash
+sudo ./go.sh
+````
+To connect to a specific VPN:
+```` bash
+sudo ./go.sh specific.ovpn
+````
