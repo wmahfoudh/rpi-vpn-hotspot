@@ -158,7 +158,8 @@ interface=wlan1
 dhcp-range=192.168.50.2,192.168.50.100,255.255.255.0,24h
 server=8.8.8.8
 server=8.8.4.4
-   ```
+```
+
 ### Set Up IP Address for wlan1
 Configure a static IP for `wlan1`:
 ````bash
