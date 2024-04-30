@@ -2,7 +2,7 @@
 This repository provides a way of configuring the Raspberry Pi as a VPN gateway and wireless access point using command-line interface of a minimal Raspbian OS. This guide details the processes for installing and configuring OpenVPN, setting up a secondary wireless network interface as a Wi-Fi hotspot, and integrating.
 This setup is tested on the Raspberry Pi 3b, it should work on any vanilla Raspbian, connected preferably with a static IP address and accessible through ssh for convenience. 
 ## Installing OpenVPN
-````
+```` bash
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get install openvpn openresolv
@@ -16,6 +16,7 @@ openresolv is a utility to manage resolv.conf, which is the configuration file f
 Tyically, 
 - We have multiple OpenVPN connection files `.ovpn`, we chose which one to use
 - We connect to Raspberry Pi though ssh and we would like to leave the VPN connected when we close the ssh session
+
 We will create a simple bash script that:
 - Takes a `.ovpn` as argument to use it for connection, if not provided it will connect to a default one
 - Connects and leave OpenVPN running in the background
@@ -23,7 +24,7 @@ We will create a simple bash script that:
 - Uses a text file called `login.conf` where the OpenVPN username and password are stored to connect without prompt (you can secure this file and make it accessible only to root users, this will work because we will run the scipt as root)
 - Logs the output of OpenVPN to a text file `out.txt`
 Here we go:
-````
+```` bash
 #!/bin/bash
 
 # Define the default VPN configuration file path
