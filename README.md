@@ -225,3 +225,20 @@ After all the mess we made, we need to reboot
 sudo reboot
 ```
 After reboot, you should be able to see and connect to your new Hotspot. Connect your VPN and voilà!
+
+## VPN Coonection drop issue
+I found that the VPN connection drops after long time of inactivity. Adding a `keepalive` directive below the servers list helps.
+````
+client
+dev tun
+proto udp
+
+remote xx.xx.xx.xx xxxx
+remote xx.xx.xx.xx xxxx
+
+keepalive 10 60
+
+server-poll-timeout 20
+...
+````
+This allows sending a ping every 10 seconds and assuming the connection is down if no response is received within 60 seconds, triggering a reconnection if necessary.
