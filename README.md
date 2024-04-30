@@ -171,7 +171,7 @@ Add to the end:
 interface wlan1
 static ip_address=192.168.50.1/24
 nohook wpa_supplicant
-st`atic domain_name_servers=8.8.8.8 8.8.4.4
+static domain_name_servers=8.8.8.8 8.8.4.4
 ```
 
 ### Enable and Start Services
