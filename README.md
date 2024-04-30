@@ -97,4 +97,8 @@ fi
 ````
 ## Hotspot Setup with the VPN
 ### Installations
-
+```` bash
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install hostapd dnsmasq iptables-persistent
+````
