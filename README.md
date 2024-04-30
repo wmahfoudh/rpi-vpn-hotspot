@@ -116,7 +116,7 @@ And add the following configuration:
 ```
 interface=wlan1
 driver=nl80211
-ssid=use-your-illusion
+ssid=Locomotive
 hw_mode=g
 channel=6
 ieee80211n=1
@@ -128,7 +128,7 @@ wpa=2
 wpa_key_mgmt=WPA-PSK
 wpa_pairwise=TKIP
 rsn_pairwise=CCMP
-wpa_passphrase=locomotive
+wpa_passphrase=use-your-illusion
 ```
    Adjust settings like `ssd`, `wpa_passphrase` and `channel` as necessary.
 
