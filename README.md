@@ -50,6 +50,19 @@ echo "Fetching public IPv4 address..."
 PUBLIC_IP=$(curl -s https://ipinfo.io/ip)
 echo "Your public IPv4 address is: $PUBLIC_IP"
 ````
+#### What is `nohup`?
+- **Purpose**: The `nohup` command, short for "no hangup," is used to run a command immune to hangups, with the output sent to a non-tty. It's used to run a process in the background that should continue running even if the user logs out.
+- **Functionality**: `nohup` prevents the process from receiving a SIGHUP (signal hang up), which is normally sent to a process when its controlling terminal is closed (for example, when the user logs out).
+- **Output Redirection**: By default, `nohup` redirects the standard output (stdout) and standard error (stderr) to a file named `nohup.out` if no output redirection is specified. This is useful for capturing the output of the process after disconnecting from the terminal.
+
+#### Why use `&`?
+- **Background Execution**: The `&` at the end of a command line in Unix-like systems tells the shell to run the command in the background. This means you can continue using the terminal for other commands while the background process runs.
+- **Immediate Return**: Using `&` allows the shell to immediately return to the command prompt without waiting for the command to complete.
+
+#### Combining `nohup` and `&`
+- **Continuous Operation**: When combined, `nohup` and `&` allow a process to run continuously in the background, immune to hangups, even after the user has logged out. This is particularly useful for long-running processes on remote servers where the user might need to disconnect.
+- **Example Usage**: In your script, `nohup openvpn --config $VPN_CONFIG --auth-user-pass $AUTH_FILE --auth-nocache >$OUTPUT_FILE 2>&1 &` is used to start the OpenVPN client in a way that ensures it continues to run securely and logs its output even if the initiating session ends. The `>$OUTPUT_FILE 2>&1` part redirects both stdout and stderr to a file you specify (`$OUTPUT_FILE`), making it easy to later review what happened.
+
 Let's call this file `go.sh` and make it executable:
 ```` bash
 chmod +x go.sh
@@ -83,4 +96,6 @@ else
     echo "No OpenVPN process found."
 fi
 ````
-## Creating a Hotspot
+## Hotspot Setup with the VPN
+### Installations
+
