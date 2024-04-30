@@ -61,7 +61,6 @@ echo "Your public IPv4 address is: $PUBLIC_IP"
 
 #### Combining `nohup` and `&`
 - **Continuous Operation**: When combined, `nohup` and `&` allow a process to run continuously in the background, immune to hangups, even after the user has logged out. This is particularly useful for long-running processes on remote servers where the user might need to disconnect.
-- **Example Usage**: In your script, `nohup openvpn --config $VPN_CONFIG --auth-user-pass $AUTH_FILE --auth-nocache >$OUTPUT_FILE 2>&1 &` is used to start the OpenVPN client in a way that ensures it continues to run securely and logs its output even if the initiating session ends. The `>$OUTPUT_FILE 2>&1` part redirects both stdout and stderr to a file you specify (`$OUTPUT_FILE`), making it easy to later review what happened.
 
 Let's call this file `go.sh` and make it executable:
 ```` bash
