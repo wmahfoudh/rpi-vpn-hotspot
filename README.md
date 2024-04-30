@@ -11,17 +11,26 @@ We will install openvpn as well as openresolv.
 OpenVPN is a robust and highly configurable VPN solution that allows secure point-to-point or site-to-site connections with routed or bridged configurations and remote access facilities. It uses SSL/TLS for key exchange and is capable of traversing network address translators (NATs) and firewalls.
 ### Why openresolv?
 openresolv is a utility to manage resolv.conf, which is the configuration file for DNS resolvers in Unix-like systems. It allows multiple programs that need to modify resolv.conf to do so safely and flexibly. Programs like VPN clients can dynamically update DNS settings without conflicting with each other. It handles DNS requests properly, **protecting against DNS leaks**.
-### Let's make it easier
-Tyically, 
-- We have multiple OpenVPN connection files `.ovpn`, we chose which one to use
-- We connect to Raspberry Pi though ssh and we would like to leave the VPN connected when we close the ssh session
 
-We will create a simple bash script that:
+If you are on ProtonVPN, you would like to download and activate its configuration:
+````bash
+sudo wget "https://raw.githubusercontent.com/ProtonVPN/scripts/master/update-resolv-conf.sh" -O "/etc/openvpn/update-resolv-conf"
+sudo chmod +x "/etc/openvpn/update-resolv-conf"
+````
+To connect to OpenVPN, simply run `your-ovpn-file.ovpn`
+
+### Let's make it fancier
+Tyically, 
+- We have multiple OpenVPN connection files `.ovpn`, we should be able to choose which one to use
+- We connect to Raspberry Pi though SSH and we would like to leave the VPN connected when we close the SSH session
+
+We will create a simple script that:
 - Takes a `.ovpn` as argument to use it for connection, if not provided it will connect to a default one
 - Connects and leave OpenVPN running in the background
 - After connecting, it will fetch the external IP address and display it
-- Uses a text file called `login.conf` where the OpenVPN username and password are stored to connect without prompt (you can secure this file and make it accessible only to root users, this will work because we will run the scipt as root)
-- Logs the output of OpenVPN to a text file `out.txt`
+- Uses a text file called `login.conf` where the OpenVPN username and password are stored to connect without prompt (you can chmod this file and make it accessible only to root users, this will work because we will run the scipt as root)
+- Optionally, logs the output of OpenVPN to a text file `out.txt`
+
 Here we go, 
 ```` bash
 #!/bin/bash
