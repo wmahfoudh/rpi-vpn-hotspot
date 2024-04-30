@@ -161,41 +161,45 @@ server=8.8.4.4
    ```
 ### Set Up IP Address for wlan1
 Configure a static IP for `wlan1`:
-```bash
+````bash
 sudo nano /etc/dhcpcd.conf
-```
+````
+
 Add to the end:
-```
+````
 interface wlan1
 static ip_address=192.168.50.1/24
 nohook wpa_supplicant
-static domain_name_servers=8.8.8.8 8.8.4.4
+st`atic domain_name_servers=8.8.8.8 8.8.4.4
 ```
 
 ### Enable and Start Services
 Enable and start `hostapd` and restart `dnsmasq`:
-```bash
+````bash
 sudo systemctl unmask hostapd
 sudo systemctl enable hostapd
 sudo systemctl start hostapd
 sudo systemctl restart dnsmasq
-```
+````
 
 ### Enable IP Forwarding and NAT
 Edit `sysctl.conf` to enable IP forwarding:
-```bash
+````bash
 sudo nano /etc/sysctl.conf
-```
+````
+
 Un-comment:
-```
+```` bash
 net.ipv4.ip_forward=1
-```
+````
+
 Apply changes:
-```bash
+````bash
 sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
+````
 
 ### The final touch: NAT Setup:
-When the VPN is connected, it creates a virtual interface (usually `tun0`. Now we need to tell the system how to route the traffic through the interfaces, especially the VPN interface.
+When the VPN is connected, it creates a virtual interface (usually `tun0`). Now we need to tell the system how to route the traffic through the interfaces, especially the VPN interface.
 If you don't do this, the WiFi hotspot will work, but you won't be able to access the internet even if the Pi is connected.
 ``` bash
 sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
@@ -204,8 +208,9 @@ sudo iptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE
 sudo iptables -t nat -A POSTROUTING -o tun0 -j MASQUERADE
 sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
 ```
-Remember `iptables-persistent` that we installed in the beginning? That will ensure that our `iptables` rules above are reloaded on boot.
-We can force this also by running `sudo netfilter-persistent save`
+
+Remember `iptables-persistent` that we installed in the beginning? That will ensure that our `iptables` rules above are reloaded on boot. We can force this also by running `sudo netfilter-persistent save`
+
 ### Reboot
 After all the mess we made, we need to reboot
 ```bash
