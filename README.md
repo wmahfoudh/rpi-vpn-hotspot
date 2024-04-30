@@ -172,7 +172,7 @@ interface wlan1
 static ip_address=192.168.50.1/24
 nohook wpa_supplicant
 static domain_name_servers=8.8.8.8 8.8.4.4
-```
+````
 
 ### Enable and Start Services
 Enable and start `hostapd` and restart `dnsmasq`:
@@ -199,7 +199,7 @@ Apply changes:
 sudo sh -c "echo 1 > /proc/sys/net/ipv4/ip_forward"
 ````
 
-### The final touch: NAT Setup:
+**The final touch**
 When the VPN is connected, it creates a virtual interface (usually `tun0`). Now we need to tell the system how to route the traffic through the interfaces, especially the VPN interface.
 If you don't do this, the WiFi hotspot will work, but you won't be able to access the internet even if the Pi is connected.
 ``` bash
