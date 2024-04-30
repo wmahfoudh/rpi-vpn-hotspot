@@ -17,7 +17,7 @@ If you are on ProtonVPN, you would like to download and activate its configurati
 sudo wget "https://raw.githubusercontent.com/ProtonVPN/scripts/master/update-resolv-conf.sh" -O "/etc/openvpn/update-resolv-conf"
 sudo chmod +x "/etc/openvpn/update-resolv-conf"
 ````
-To connect to OpenVPN, simply run `your-ovpn-file.ovpn`
+To connect using OpenVPN, simply run `sudo openvpn your-ovpn-file.ovpn`
 
 ### Let's make it fancier
 Tyically, 
