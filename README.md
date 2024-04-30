@@ -103,31 +103,40 @@ sudo apt-get upgrade
 sudo apt-get install hostapd dnsmasq iptables-persistent
 ````
 ### Plug in the USB WiFi Adapter and identify it
-It is better to use a different WiFi adpter to run the Hotspot, we assume this scenario here. Plus it and run `ip a`. We need the name of the interface we will be using for the rest. We assume here it is `wlan1`
+It is better to use a different WiFi adpter to run the Hotspot, we assume this scenario here. Plug it and run `ip a`. We need the name of the interface we will be using for the rest. We assume here it is `wlan1`
 
 ### Configure Hostapd
 Hostapd will manage your hotspot. You need to create a configuration file for your new adapter:
 
 Create the hostapd configuration file for `wlan1`:
-   ```bash
-   sudo nano /etc/hostapd/wlan1.conf
-   ```
-   And add the following configuration:
-   ```
-   interface=wlan1
-   driver=nl80211
-   ssid=use-your-illusion
-   hw_mode=g
-   channel=6
-   ieee80211n=1
-   wmm_enabled=1
-   macaddr_acl=0
-   ignore_broadcast_ssid=0
-   auth_algs=1
-   wpa=2
-   wpa_key_mgmt=WPA-PSK
-   wpa_pairwise=TKIP
-   rsn_pairwise=CCMP
-   wpa_passphrase=locomotive
-   ```
+```bash
+sudo nano /etc/hostapd/wlan1.conf
+```
+And add the following configuration:
+```
+interface=wlan1
+driver=nl80211
+ssid=use-your-illusion
+hw_mode=g
+channel=6
+ieee80211n=1
+wmm_enabled=1
+macaddr_acl=0
+ignore_broadcast_ssid=0
+auth_algs=1
+wpa=2
+wpa_key_mgmt=WPA-PSK
+wpa_pairwise=TKIP
+rsn_pairwise=CCMP
+wpa_passphrase=locomotive
+```
    Adjust settings like `ssd`, `wpa_passphrase` and `channel` as necessary.
+
+Now, tell Hostapd to use this configuration file by editing its main configuration
+````bash
+sudo nano /etc/default/hostapd
+````
+Find the line `#DAEMON_CONF=""` and change it to:
+```` bash
+DAEMON_CONF="/etc/hostapd/wlan1.conf"
+````
