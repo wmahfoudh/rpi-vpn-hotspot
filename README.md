@@ -11,7 +11,7 @@ We will install openvpn as well as openresolv.
 ### What is OpenVPN?
 OpenVPN is a robust and highly configurable VPN solution that allows secure point-to-point or site-to-site connections with routed or bridged configurations and remote access facilities. It uses SSL/TLS for key exchange and is capable of traversing network address translators (NATs) and firewalls.
 ### Why openresolv?
-openresolv is a utility to manage resolv.conf, which is the configuration file for DNS resolvers in Unix-like systems. It allows multiple programs that need to modify resolv.conf to do so safely and flexibly. Programs like VPN clients can dynamically update DNS settings without conflicting with each other. It handles DNS requests properly, protecting against DNS leaks.
+openresolv is a utility to manage resolv.conf, which is the configuration file for DNS resolvers in Unix-like systems. It allows multiple programs that need to modify resolv.conf to do so safely and flexibly. Programs like VPN clients can dynamically update DNS settings without conflicting with each other. It handles DNS requests properly, **protecting against DNS leaks**.
 ### Let's make it easier
 Tyically, 
 - We have multiple OpenVPN connection files `.ovpn`, we chose which one to use
@@ -65,7 +65,7 @@ sudo ./go.sh
 ````
 To connect to a specific VPN:
 ```` bash
-sudo ./go.sh specific.ovpn
+sudo ./go.sh another-vpn.ovpn
 ````
 Before we finish, let's create another script `stop.sh` to stop OpenVPN when needed:
 ```` bash
