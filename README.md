@@ -1,5 +1,5 @@
 # Setting up a VPN + Hotspot on the Raspberry PI
-This guide demonstrates how to configure a Raspberry Pi as a VPN gateway and Wi-Fi access point so to act like a VPN router. It covers the installation and configuration of OpenVPN, the setup of a secondary wireless network interface as a hotspot, and their integration. A noted challenge is the need to use `dhcpcd`, which is the default for Raspbian, so no NetworkManager like in many other Linux distributions (no `nmcli`). This configuration has been tested on the Raspberry Pi 3b and should work on any standard Raspbian installation (with or without desktop environment), ideally with a static IP on default interface and accessible via SSH.
+This shows how to configure a Raspberry Pi as a VPN gateway and Wi-Fi access point so to act like a VPN router. It covers the installation and configuration of OpenVPN, the setup of a secondary wireless network interface as a hotspot, and their integration. `dhcpcd` is the default in Raspbian, no NetworkManager (no `nmcli`) and this is not very well documented. This works on the Raspberry Pi 3B and should work on any standard Raspbian installation (with or without desktop environment), ideally with a static IP on default interface and accessible via SSH.
 ## Installing OpenVPN
 ```` bash
 sudo apt-get update
