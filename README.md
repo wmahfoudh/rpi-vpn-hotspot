@@ -107,7 +107,7 @@ sudo apt-get upgrade
 sudo apt-get install hostapd dnsmasq iptables-persistent
 ````
 ### Plug in the USB WiFi Adapter and identify it
-It is better to use a different WiFi adpter to run the Hotspot, we assume this scenario here. Plug it and run `ip a`. We need the name of the interface we will be using for the rest. We assume here it is `wlan1`
+For improved bandwidth and stability, it is better to use a different WiFi adpter to run the Hotspot, we assume this scenario here. Plug it and run `ip a`. We need the name of the interface we will be using for the rest. We assume here it is `wlan1`
 
 ### Configure Hostapd
 Hostapd will manage your hotspot. You need to create a configuration file for your new adapter:
