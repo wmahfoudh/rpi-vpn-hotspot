@@ -70,7 +70,7 @@ Let's call this file `go.sh` and make it executable:
 ```` bash
 chmod +x go.sh
 ````
-`login.conf` looks like this:
+The `login.conf` looks like this by the way:
 ```` text
 username
 password
