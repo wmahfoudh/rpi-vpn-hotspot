@@ -110,7 +110,7 @@ sudo apt-get install hostapd dnsmasq iptables-persistent
 For improved bandwidth and stability, it is better to use a different WiFi adpter to run the Hotspot, we assume this scenario here. Plug it and run `ip a`. We need the name of the interface we will be using for the rest. We assume here it is `wlan1`
 
 ### Configure Hostapd
-Hostapd will manage your hotspot. You need to create a configuration file for your new adapter:
+Hostapd will manage the hotspot. We need to create a configuration file for your new adapter:
 
 Create the hostapd configuration file for `wlan1`:
 ```bash
@@ -134,9 +134,9 @@ wpa_pairwise=TKIP
 rsn_pairwise=CCMP
 wpa_passphrase=use-your-illusion
 ```
-   Adjust settings like `ssd`, `wpa_passphrase` and `channel` as necessary.
+Adjust settings like `ssd`, `wpa_passphrase` and `channel` as necessary.
 
-Now, tell Hostapd to use this configuration file by editing its main configuration
+Now, tell Hostapd to use this configuration file, by editing its main configuration
 ````bash
 sudo nano /etc/default/hostapd
 ````
@@ -151,7 +151,7 @@ Back up the existing Dnsmasq configuration:
 ```bash
 sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
 ```
-   
+
 Create a new configuration:
 ```bash
 sudo nano /etc/dnsmasq.conf
