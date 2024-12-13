@@ -67,7 +67,7 @@ echo -e "${GREEN}VPN started in the background. Logs are being written to $OUTPU
 
 # Wait for the VPN to establish connection
 echo -e "${YELLOW}Waiting for the VPN connection to establish...${NC}"
-progress_bar 5  # Simulate a 5-second wait for VPN to connect
+progress_bar 10  # Simulate a 10-second wait for VPN to connect
 
 # Fetch and display the public IPv4 address
 echo -e "${YELLOW}Fetching public IPv4 address...${NC}"
