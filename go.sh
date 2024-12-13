@@ -21,30 +21,30 @@ progress_bar() {
 }
 
 # Define the default VPN configuration file path
-DEFAULT_VPN_CONFIG="/root/rpi-vpn-hotspot/default.ovpn"
-AUTH_FILE="/root/rpi-vpn-hotspot/login.conf"  # Ensure this path is correct
+DEFAULT_VPN_CONFIG="default.ovpn"
+AUTH_FILE="login.conf"  # Ensure this path is correct
 
 # Check if an argument was provided and use it as the VPN config file; otherwise, use the default
 VPN_CONFIG="${1:-$DEFAULT_VPN_CONFIG}"
 
 # Output file for storing logs
-OUTPUT_FILE="/root/rpi-vpn-hotspot/out.txt"
+OUTPUT_FILE="out.txt"
 
 # Check if the VPN configuration file exists
 if [ ! -f "$VPN_CONFIG" ]; then
-    echo -e "${RED}Error: VPN configuration file '$VPN_CONFIG' not found.${NC}"
+    echo -e "${RED}Error: VPN configuration file '$VPN_CONFIG' not found.${NC}" | tee -a "$OUTPUT_FILE"
     exit 1
 fi
 
 # Check if the authentication file exists
 if [ ! -f "$AUTH_FILE" ]; then
-    echo -e "${RED}Error: Authentication file '$AUTH_FILE' not found.${NC}"
+    echo -e "${RED}Error: Authentication file '$AUTH_FILE' not found.${NC}" | tee -a "$OUTPUT_FILE"
     exit 1
 fi
 
 # Check if curl is installed
 if ! command -v curl &> /dev/null; then
-    echo -e "${RED}Error: curl is not installed. Please install it to proceed.${NC}"
+    echo -e "${RED}Error: curl is not installed. Please install it to proceed.${NC}" | tee -a "$OUTPUT_FILE"
     exit 1
 fi
 
@@ -59,7 +59,7 @@ sleep 3
 
 # Check if the VPN process started successfully
 if ! ps -p $VPN_PID > /dev/null; then
-    echo -e "${RED}Error: VPN process failed to start.${NC}"
+    echo -e "${RED}Error: VPN process failed to start.${NC}" | tee -a "$OUTPUT_FILE"
     exit 1
 fi
 
@@ -74,8 +74,8 @@ echo -e "${YELLOW}Fetching public IPv4 address...${NC}"
 PUBLIC_IP=$(curl -s https://ipinfo.io/ip)
 
 if [ -z "$PUBLIC_IP" ]; then
-    echo -e "${RED}Error: Could not retrieve the public IP address.${NC}"
+    echo -e "${RED}Error: Could not retrieve the public IP address.${NC}" | tee -a "$OUTPUT_FILE"
     exit 1
 fi
 
-echo -e "${GREEN}Your public IPv4 address is: $PUBLIC_IP${NC}"
+echo -e "${GREEN}Your public IPv4 address is: $PUBLIC_IP${NC}" | tee -a "$OUTPUT_FILE"
